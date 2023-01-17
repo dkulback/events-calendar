@@ -1,0 +1,37 @@
+<%= form_with(model: show) do |form| %>
+  <% if show.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(show.errors.count, "error") %> prohibited this show from being saved:</h2>
+
+      <ul>
+        <% show.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :band, style: "display: block" %>
+    <%= form.text_field :band %>
+  </div>
+
+  <div>
+    <%= form.label :doors, style: "display: block" %>
+    <%= form.text_field :doors %>
+  </div>
+
+  <div>
+    <%= form.label :venue, style: "display: block" %>
+    <%= form.text_field :venue %>
+  </div>
+
+  <div>
+    <%= form.label :date, style: "display: block" %>
+    <%= form.date_field :date %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
