@@ -1,12 +1,17 @@
-<p style="color: green"><%= notice %></p>
 
+
+<p style="color: green" class='notice'><%= notice %></p>
+
+<div class='scrape-lar'>
+  <%= button_to 'Scrape', scrape_shows_path, params: {url: 'https://larimerlounge.com/events/'}%>
+</div>
 <h1>Shows</h1>
 
 <div id="shows">
   <% @shows.each do |show| %>
     <%= render show %>
     <p>
-      <%= link_to "Show this show", show %>
+    <%= link_to "Show this show", show %>
     </p>
   <% end %>
 </div>

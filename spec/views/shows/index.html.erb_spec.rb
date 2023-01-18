@@ -1,26 +1,36 @@
 require 'rails_helper'
 
-RSpec.describe "shows/index", type: :view do
+RSpec.describe 'shows/index', type: :feature do
   before(:each) do
-    assign(:shows, [
-      Show.create!(
-        band: "Band",
-        doors: "Doors",
-        venue: "Venue"
-      ),
-      Show.create!(
-        band: "Band",
-        doors: "Doors",
-        venue: "Venue"
-      )
-    ])
+    Show.create!(
+      band: 'band name',
+      doors: 'Door time',
+      venue: 'Venue name'
+    )
+    Show.create!(
+      band: 'band name',
+      doors: 'Door time',
+      venue: 'Venue name'
+    )
   end
 
-  it "renders a list of shows" do
-    render
-    cell_selector = Rails::VERSION::STRING >= '7' ? 'div>p' : 'tr>td'
-    assert_select cell_selector, text: Regexp.new("Band".to_s), count: 2
-    assert_select cell_selector, text: Regexp.new("Doors".to_s), count: 2
-    assert_select cell_selector, text: Regexp.new("Venue".to_s), count: 2
+  it 'renders a list of shows' do
+    visit root_path
+    expect(page).to have_content('band name', count: 2)
+    expect(page).to have_content('Door time', count: 2)
+    expect(page).to have_content('Venue name', count: 2)
+  end
+  it 'has a button to scrape for shows' do
+    visit root_path
+
+    within '.scrape-lar' do
+      expect(page).to have_button('Scrape')
+      click_on 'Scrape'
+      expect(current_path).to eq(root_path)
+    end
+    save_and_open_page
+    within '.notice' do
+      expect(page).to have_content('Successfully scraped urls')
+    end
   end
 end
