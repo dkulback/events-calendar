@@ -6,7 +6,9 @@ ruby '2.7.2'
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem 'rails', '~> 7.0.1'
 
-gem 'kimurai'
+gem 'faraday'
+
+gem 'nokogiri'
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem 'sprockets-rails'
@@ -52,14 +54,15 @@ gem 'bootsnap', require: false
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
-  gem 'capybara'
   gem 'debug', platforms: %i[mri mingw x64_mingw]
+  gem 'factory_bot_rails'
   gem 'launchy'
   gem 'pry'
   gem 'rspec-rails'
 end
 
 group :test do
+  gem 'capybara'
   gem 'database_cleaner'
   gem 'shoulda-matchers', '~> 3.1'
   gem 'simplecov'
