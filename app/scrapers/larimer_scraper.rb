@@ -10,6 +10,7 @@ class LarimerScraper
       show[:venue] = event.css('a').css('.venueLink')&.text&.squish
       show[:doors] = event.css("[class='eventDateDetails mt-md-0 mb-md-2']")&.text&.squish
       show[:date] = show[:date].to_date
+      show[:tickets] = event.css("[class='btn btn-primary btn-md d-block w-100']")[0]['href']
       Show.find_or_create_by(show)
     end
   end
