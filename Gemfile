@@ -7,6 +7,7 @@ ruby '2.7.2'
 gem 'rails', '~> 7.0.1'
 
 gem 'faraday'
+gem 'faraday-retry'
 
 gem 'nokogiri'
 
@@ -78,3 +79,5 @@ group :development do
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
 end
+
+gem "tailwindcss-rails", "~> 2.0"

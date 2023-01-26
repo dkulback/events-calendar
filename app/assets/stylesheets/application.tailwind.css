@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/* Custom styles */
+.table {
+    @apply text-gray-700 bg-white rounded-lg overflow-x-auto;
+}
+
+.table-header {
+    @apply font-medium text-lg text-gray-900;
+}
+
+.table-row {
+    @apply border-b border-gray-200;
+}
+
+.table-cell {
+    @apply p-2 text-gray-700;
+}
+/* Custom styles */
+/*
+
+@layer components {
+  .btn-primary {
+    @apply py-2 px-4 bg-blue-200;
+  }
+}
+
+*/
