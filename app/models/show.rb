@@ -1,5 +1,5 @@
 class Show < ApplicationRecord
-  def self.by_date
-    order(:date)
-  end
+  scope :by_date, lambda {
+                    where(date: Date.today..Date.today.next_year).order(:date)
+                  }
 end
