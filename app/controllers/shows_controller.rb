@@ -1,14 +1,17 @@
 class ShowsController < ApplicationController
-  @@asignment_lock = Mutex.new
   before_action :set_show, only: %i[show edit update destroy]
 
   # GET /shows or /shows.json
   def index
-    @shows = Show.all
+    @shows = if params[:search].present?
+               Show.search(params[:search])
+             else
+               Show.by_date
+             end
   end
 
   def scrape
-    response = LarimerScraper.larimer_shows
+    response = ShowBuilderService.build
     if response
       flash[:notice] = 'Successfully scraped urls'
     else
