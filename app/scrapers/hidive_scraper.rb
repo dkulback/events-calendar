@@ -2,18 +2,19 @@ class HidiveScraper
   URL = 'https://www.eventbrite.com/d/co--denver/hi-dive/'
   def self.shows
     events = Connection.get_url(URL)
-    events.xpath("//div[@class='eds-event-card-content__content__principal']").each do |event|
+    shows = []
+    events.css('article').each do |event|
       venue = event.css("[class='card-text--truncated__one']").text.squish
       next unless venue == 'Hi-Dive • Denver, CO'
 
       show = {}
-      date = event.css("[class='eds-event-card-content__sub-title eds-text-color--primary-brand eds-l-pad-bot-1 eds-l-pad-top-2 eds-text-weight--heavy eds-text-bm']").text
+      date = event.css('.eds-event-card-content__primary-content').css('div').last.text
       date = Date.tomorrow if date.include?('Tomorrow')
       show[:band] = event.css("[class='eds-is-hidden-accessible']").text
-      show[:date] = date.to_date
+      show[:date] = date.to_date unless date.blank?
       show[:venue] = venue
       show[:tickets] = event.css('a')[0]['href']
-      Show.find_or_create_by(show)
+      shows << show
     end
 
     events = Connection.get_url('https://www.eventbrite.com/d/co--denver/hi-dive/?page=2')
@@ -22,13 +23,15 @@ class HidiveScraper
       next unless venue == 'Hi-Dive • Denver, CO'
 
       show = {}
-      date = event.css("[class='eds-event-card-content__sub-title eds-text-color--primary-brand eds-l-pad-bot-1 eds-l-pad-top-2 eds-text-weight--heavy eds-text-bm']").text
+      date = event.css('.eds-event-card-content__primary-content').css('div').last.text
       date = Date.tomorrow if date.include?('Tomorrow')
+      date = Date.today if date.include?('Today')
       show[:band] = event.css("[class='eds-is-hidden-accessible']").text
-      show[:date] = date.to_date
+      show[:date] = date.to_date unless date.blank?
       show[:venue] = venue
       show[:tickets] = event.css('a')[0]['href']
-      Show.find_or_create_by(show)
+      shows << show
     end
+    shows
   end
 end
