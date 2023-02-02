@@ -5,11 +5,13 @@ RSpec.describe 'shows/index', type: :feature do
     Show.create!(
       band: 'band name',
       doors: 'Door time',
+      date: Date.today,
       venue: 'Venue name'
     )
     Show.create!(
       band: 'band name',
       doors: 'Door time',
+      date: Date.today,
       venue: 'Venue name'
     )
   end
@@ -28,21 +30,21 @@ RSpec.describe 'shows/index', type: :feature do
       click_on 'Scrape'
       expect(current_path).to eq(root_path)
     end
-    save_and_open_page
     within '.notice' do
       expect(page).to have_content('Successfully scraped urls')
     end
   end
   describe 'search form' do
     it 'lets users search by venue name' do
-      Show.create!(date: Date.yesterday, venue: 'Gothic')
+      Show.create!(date: Date.today.yesterday, venue: 'Gothic')
       Show.create!(date: Date.today, venue: 'Bluebird')
       Show.create!(date: Date.tomorrow, venue: 'hi dive')
-      Show.create!(date: '31 Jan'.to_date.freeze, venue: 'Gothic')
+      Show.create!(date: Date.today.next_year.freeze, venue: 'Gothic')
 
       visit root_path
-      within(:xpath, ".//div[@class='flex items-center border-b border-teal-500 py-2']") do
+      within('//div[@class="flex items-center border-b border-teal-500 py-2"]') do
         fill_in 'search', with: 'Gothic'
+
         click_on 'Search'
       end
       expect(current_path).to eq(shows_path)
