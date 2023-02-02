@@ -1,6 +1,6 @@
 class Show < ApplicationRecord
   scope :by_date, lambda {
-    where(date: Date.today..Date.today.next_year).order(:date)
+    where('date >= ?', Date.today).order(:date)
   }
 
   def self.search(search_params)
