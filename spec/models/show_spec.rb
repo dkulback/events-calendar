@@ -13,7 +13,7 @@ RSpec.describe Show, type: :model do
       expect(actual).to eq(expected)
     end
   end
-  describe '::search' do
+  describe '::search//' do
     it 'lets the shows by the date header and venue search param' do
       show0 = Show.create!(date: Date.today.yesterday, venue: 'Gothic')
       show1 = Show.create!(date: Date.today, venue: 'Bluebird')
@@ -21,6 +21,10 @@ RSpec.describe Show, type: :model do
       show3 = Show.create!(date: Date.today.next_year.freeze, venue: 'Gothic')
       actual = Show.search('gothic')
       expected = [show3]
+      expect(actual).to eq(expected)
+
+      actual = Show.search('', Date.today)
+      expected = [show1]
       expect(actual).to eq(expected)
     end
   end
