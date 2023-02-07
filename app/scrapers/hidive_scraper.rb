@@ -9,8 +9,8 @@ class HidiveScraper
 
       show = {}
       date = event.css('.eds-event-card-content__primary-content').css('div').last.text
-      date = Date.tomorrow if date.include?('Tomorrow')
-      show[:band] = event.css("[class='eds-is-hidden-accessible']").text
+      date = Date.today.tomorrow if date.include?('Tomorrow')
+      show[:band] = event.css("[class='eds-is-hidden-accessible']").css('div').text
       show[:date] = date.to_date unless date.blank?
       show[:venue] = venue
       show[:tickets] = event.css('a')[0]['href']
@@ -24,9 +24,9 @@ class HidiveScraper
 
       show = {}
       date = event.css('.eds-event-card-content__primary-content').css('div').last.text
-      date = Date.tomorrow if date.include?('Tomorrow')
+      date = Date.today.tomorrow if date.include?('Tomorrow')
       date = Date.today if date.include?('Today')
-      show[:band] = event.css("[class='eds-is-hidden-accessible']").text
+      show[:band] = event.css("[class='eds-is-hidden-accessible']").css('div').text
       show[:date] = date.to_date unless date.blank?
       show[:venue] = venue
       show[:tickets] = event.css('a')[0]['href']
