@@ -1,33 +1,42 @@
-<p style="color: green" class='notice'><%= notice %></p>
-<div class='scrape-lar'>
-  <%= button_to 'Scrape', scrape_shows_path, params: {url: 'https://larimerlounge.com/events/'}%>
-<%= form_tag shows_path, method: :get, class: "mb-4" do %>
-  <div class="flex items-center border-b border-teal-500 py-2">
-    <%= text_field_tag :search, params[:search], placeholder: "Search...", class: "appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" %>
-    <%= submit_tag "Search", class: "flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded" %>
-  </div>
-<% end %>
-  <div class="lg:col-span-3">
-    <div class="grid grid-cols 4 gap-4 mb-4">
-      <div class="col-start-1 col-end-4">
-        <% @shows.each do |show| %>
-          <div class="border-4 border-y-rose-500/100">
-            <p class="">
-            <%= show.date%>
-            <p class="">
-            <%= show.band %>
-            </p>
-            <p class="">
-            <%= show.venue%>
-            </p>
-            <p class="">
-            <%= show.doors %>
-            </p>
-            <% if !show.tickets.blank? %>
-              <a href="<%= show.tickets%>" class="text-blue-500 underline">tickets</a>
-            <% end %>
-          </div>
-        <% end %>
+<div class="place-items-center">
+  <header class="shadow-lg opactiy-25 text-green-200 py-4 font-cool-font content-center">
+    <div class="container mx-auto">
+      <h1 class="text-6xl font-bold inset-1 text-center">Current Events</h1>
+    </div>
+  </header>
+  <%= form_tag shows_path, method: :get, class: "mb-4" do %>
+    <div class="flex items-center border-b border-teal-500 py-2 place-items-center">
+      <%= select_tag :search, options_for_select(Show.pluck(:venue).uniq),  prompt: "Venue", class: "appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" %>
+      <%= date_field_tag :date_input, nil, class: "appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" %>
+      <%= submit_tag "Search", class: "flex-shrink-0 bg-green-200 hover:bg-green-200 border-green-200 hover:border-green-200 text-sm border-4 text-grey-700 py-1 px-2 rounded" %>
+    </div>
+  <% end %>
+  <div class="shows-data">
+
+    <div class="flex items-center container mx-auto lg:col-span-3 place-items-center">
+      <div class="grid grid-cols 4 gap-4 mb-4">
+        <div class="col-start-1 col-end-4">
+          <% @shows.each do |show| %>
+            <div class="border-4 border-y-rose-500/100">
+              <p class="">
+              <%= show.date%>
+              <p class="">
+              <%= show.band %>
+              </p>
+              <p class="">
+              <%= show.venue%>
+              </p>
+              <p class="">
+              <%= show.doors %>
+              </p>
+              <% if !show.tickets.blank? %>
+                <a href="<%= show.tickets%>" class="text-blue-500 underline">tickets</a>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
+</div>
+
