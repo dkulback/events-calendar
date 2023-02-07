@@ -1,14 +1,9 @@
 class ShowsController < ApplicationController
   before_action :set_show, only: %i[show edit update destroy]
+  before_action :search_params, only: %i[index]
 
   # GET /shows or /shows.json
-  def index
-    @shows = if params[:search].present?
-               Show.search(params[:search])
-             else
-               Show.by_date
-             end
-  end
+  def index; end
 
   def scrape
     response = ShowBuilderService.build
@@ -76,6 +71,14 @@ class ShowsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_show
     @show = Show.find(params[:id])
+  end
+
+  def search_params
+    @shows = if params[:date_input].present?
+               Show.search(params[:search], params[:date_input])
+             else
+               Show.search(params[:search])
+             end
   end
 
   # Only allow a list of trusted parameters through.
