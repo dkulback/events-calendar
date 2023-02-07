@@ -4,28 +4,23 @@
 
 
 /* Custom styles */
-.table {
-    @apply text-gray-700 bg-white rounded-lg overflow-x-auto;
-}
-
-.table-header {
-    @apply font-medium text-lg text-gray-900;
-}
-
-.table-row {
-    @apply border-b border-gray-200;
-}
-
-.table-cell {
-    @apply p-2 text-gray-700;
-}
-/* Custom styles */
-/*
 
 @layer components {
-  .btn-primary {
-    @apply py-2 px-4 bg-blue-200;
+  .dropdown:hover .dropdown-menu {
+    display: block;
+   .form-select {
+      appearance: none;
+      background-repeat: no-repeat;
+      background-position: right 0.75em top 50%;
+      background-size: 1em auto;
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath d='M9.293, 12.293, 16. 207, 5. 207, Z' fill='%23333'/%3e%3c/svg%3e");
+    }
   }
 }
 
-*/
+@import url('https://fonts.googleapis.com/css2?family=Cool-Font&display=swap');
+
+.font-cool-font {
+  font-family: 'Cool-Font', sans-serif;
+}
+
