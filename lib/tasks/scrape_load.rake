@@ -1,6 +1,6 @@
 namespace :scrape_load do
   desc 'Run All'
-  task all: %i[hidive gothic newman larimer hq mission bluebird]
+  task all: %i[hidive gothic newman larimer hq mission bluebird globe_hall lost_lake]
 
   desc 'scrape hidive for events'
   task hidive: :environment do
@@ -72,6 +72,24 @@ namespace :scrape_load do
       puts 'No Oriental Theater events to scrape.'
     else
       puts "Successfully scraped #{shows.count} Oriental Theater events"
+    end
+  end
+  desc 'scrape lost lake for evetns'
+  task lost_lake: :environment do
+    shows = ShowBuilderService.build_shows(LostLakeScraper)
+    if shows.empty?
+      puts 'No lost lake events to scrape.'
+    else
+      puts "Successfully scraped #{shows.count} lost lake events"
+    end
+  end
+  desc 'scrape lost lake for evetns'
+  task globe_hall: :environment do
+    shows = ShowBuilderService.build_shows(GlobeHallScraper)
+    if shows.empty?
+      puts 'No Glob Hall events to scrape.'
+    else
+      puts "Successfully scraped #{shows.count} Glob Hall events"
     end
   end
   desc 'Reset all Primary Keys'
