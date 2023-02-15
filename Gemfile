@@ -8,6 +8,7 @@ gem 'rails', '~> 7.0.1'
 
 gem 'faraday'
 gem 'faraday-retry'
+gem 'omniauth-google-oauth2'
 
 gem 'nokogiri'
 
@@ -80,4 +81,4 @@ group :development do
   # gem "spring"
 end
 
-gem "tailwindcss-rails", "~> 2.0"
+gem 'tailwindcss-rails', '~> 2.0'
