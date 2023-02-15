@@ -108,6 +108,8 @@ GEM
     faraday-net_http (3.0.2)
     faraday-retry (2.0.0)
       faraday (~> 2.0)
+    figaro (1.2.0)
+      thor (>= 0.14.0, < 2)
     globalid (1.0.0)
       activesupport (>= 5.0)
     hashie (5.0.0)
@@ -292,6 +294,7 @@ DEPENDENCIES
   factory_bot_rails
   faraday
   faraday-retry
+  figaro
   importmap-rails
   jbuilder
   launchy
