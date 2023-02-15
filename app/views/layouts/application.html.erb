@@ -11,11 +11,23 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
-    <main class="container mx-auto mt-28 px-5 flex">
-      <div class="relative bg-indigo-300">
-      <%= image_tag ("ozzy.jpeg"), class: "fixed mx-auto top-0 right-60 left-60 h-40 w-40 bg-repeat rounded-full" %>
-      </div>
+  <body class="bg-gradient-to-l from-pink-300 to-teal-100">
+    <main class="container mx-auto mt-28 px-5">
+      <%= image_tag ("ozzy.jpeg"), class: "bg-repeat-y fixed mx-auto top-0 right-60 left-60 h-20 w-20 bg-repeat-x rounded-full" %>
+      <%= image_tag ("ozzy.jpeg"), class: "bg-repeat-y fixed mx-auto top-0 right-57 left-57 h-20 w-20 bg-repeat-x rounded-full" %>
+      <%= image_tag ("ozzy.jpeg"), class: "bg-repeat-y fixed mx-auto top-0 right-57 left-10 h-20 w-20 bg-repeat-x rounded-full" %>
+      <%= image_tag ("ozzy.jpeg"), class: "bg-repeat-y fixed mx-auto top-0 right-57 left-13 h-20 w-20 bg-repeat-x rounded-full" %>
+      <%= image_tag ("ozzy.jpeg"), class: "bg-repeat-y absolute mx-auto top-0 right-44 left-19 h-20 w-20 bg-repeat-x rounded-full" %>
+      <%= image_tag ("ozzy.jpeg"), class: "bg-repeat-y absolute mx-auto top-0 right-6 left-0 h-20 w-20 bg-repeat-x rounded-full" %>
+      <%= image_tag ("ozzy.jpeg"), class: "bg-repeat-y absolute mx-auto top-0 right-11 left-0 h-20 w-20 bg-repeat-x rounded-full" %>
+      <%= image_tag ("ozzy.jpeg"), class: "bg-repeat-y absolute mx-auto top-0 right-16 left-0 h-20 w-20 bg-repeat-x rounded-full" %>
+      <%= image_tag ("ozzy.jpeg"), class: "bg-repeat-y absolute mx-auto top-0 right-21 left-0 h-20 w-20 bg-repeat-x rounded-full" %>
+      <%= image_tag ("ozzy.jpeg"), class: "bg-repeat-y absolute mx-auto top-0 right-26 left-0 h-20 w-20 bg-repeat-x rounded-full" %>
+      <%= image_tag ("ozzy.jpeg"), class: "bg-repeat-y absolute mx-auto top-0 right-31 left-0 h-20 w-20 bg-repeat-x rounded-full" %>
+      <%= image_tag ("ozzy.jpeg"), class: "bg-repeat-y absolute mx-auto top-0 right-36 left-0 h-20 w-20 bg-repeat-x rounded-full" %>
+      <%= image_tag ("ozzy.jpeg"), class: "bg-repeat-y absolute mx-auto top-0 right-41 left-0 h-20 w-20 bg-repeat-x rounded-full" %>
+      <%= image_tag ("ozzy.jpeg"), class: "bg-repeat-y absolute mx-auto top-0 right-46 left-0 h-20 w-20 bg-repeat-x rounded-full" %>
+      <%= image_tag ("ozzy.jpeg"), class: "bg-repeat-y absolute mx-auto top-0 right-20 -left-50 h-20 w-20 bg-repeat-x rounded-full" %>
       <%= yield %>
     </main>
   </body>
