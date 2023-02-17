@@ -8,7 +8,6 @@ gem 'rails', '~> 7.0.1'
 
 gem 'faraday'
 gem 'faraday-retry'
-gem 'omniauth-google-oauth2'
 
 gem 'nokogiri'
 
@@ -49,6 +48,11 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'bootsnap', require: false
 
 gem 'figaro'
+
+gem 'devise'
+gem 'omniauth'
+gem 'omniauth-google-oauth2'
+gem 'omniauth-rails_csrf_protection', '~> 1.0'
 
 # Use Sass to process CSS
 # gem "sassc-rails"

@@ -1,11 +1,8 @@
 Rails.application.routes.draw do
-  resources :shows do
-    match '/scrape', to: 'shows#scrape', via: :post, on: :collection
-  end
+  devise_for :users,
+             controllers: { registrations: 'users/registraitions', sessions: 'users/sessions',
+                            omniauth_callbacks: 'users/omniauth_callbacks' }
+  resources :shows
 
   root to: 'shows#index'
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Defines the root path route ("/")
-  # root "articles#index"
 end
