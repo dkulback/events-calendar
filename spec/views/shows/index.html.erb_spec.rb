@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'shows/index', type: :feature do
+  let(:user) { create(:user) }
   before(:each) do
     Show.create!(
       band: 'band name',
@@ -24,17 +25,20 @@ RSpec.describe 'shows/index', type: :feature do
       expect(page).to have_content('Venue name', count: 2)
     end
   end
-  xit 'has a button to scrape for shows' do
+  it 'has a button to add shows to a user calendar if logged in' do
+    sign_in user
     visit root_path
 
-    within '.scrape-lar' do
-      expect(page).to have_button('Scrape')
-      click_on 'Scrape'
+    within '.show-1' do
+      expect(page).to have_button('Add to Calendar')
+      click_on 'Add to Calendar'
       expect(current_path).to eq(root_path)
     end
+
     within '.notice' do
-      expect(page).to have_content('Successfully scraped urls')
+      expect(page).to have_content('Show added to your calendar!')
     end
+    sign_out user
   end
   describe 'search form' do
     scenario 'lets users search by venue name and date' do

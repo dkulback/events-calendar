@@ -1,6 +1,8 @@
 class ShowsController < ApplicationController
-  before_action :set_show, only: %i[show edit update destroy]
+  before_action :set_show, only: %i[show edit update destroy add_to_calendar]
   before_action :search_params, only: %i[index]
+  before_action :authenticate_user!, only: %i[add_to_calendar]
+  before_action :token, only: %i[add_to_calendar]
 
   # GET /shows or /shows.json
   def index; end
@@ -66,6 +68,15 @@ class ShowsController < ApplicationController
     end
   end
 
+  def add_to_calendar
+    response = CalendarClient.insert_event(current_user.access_token, @show)
+    if response['status'] == 'confirmed'
+      redirect_to root_path, notice: 'Show added to your calendar!'
+    else
+      redirect_to root_path, notice: 'Something went wrong. Please try again.'
+    end
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
@@ -81,8 +92,14 @@ class ShowsController < ApplicationController
              end
   end
 
-  # Only allow a list of trusted parameters through.
   def show_params
     params.require(:show).permit(:band, :doors, :venue, :date)
+  end
+
+  def token
+    return unless current_user.access_token_expired?
+
+    current_user.refresh_access_token!
+    current_user.save!
   end
 end
