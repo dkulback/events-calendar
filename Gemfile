@@ -74,6 +74,7 @@ group :test do
   gem 'database_cleaner'
   gem 'shoulda-matchers', '~> 3.1'
   gem 'simplecov'
+  gem 'webmock'
 end
 
 group :development do
