@@ -1,6 +1,6 @@
 # Denver Local Venue Scraper
 
-This is a web scraper that collects data from local venues in Denver. The scraped data includes venue names, addresses, phone numbers, websites, and upcoming events.
+This is a web scraper that collects data from local venues in Denver. The scraped data includes venue names, dates for events, ticket links, websites, and adding an event to authorized google account.
 
 ## Setup
 
