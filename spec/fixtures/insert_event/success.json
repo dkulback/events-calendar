@@ -1,0 +1,33 @@
+{
+    "kind": "calendar#event",
+    "etag": "\"3354373894272000\"",
+    "id": "445u3jntqqegs2nrk0pe4n5pe4",
+    "status": "confirmed",
+    "htmlLink": "https://www.google.com/calendar/event?eid=NDQ1dTNqbnRxcWVnczJucmswcGU0bjVwZTQgZGt1bGJhY2tAbQ",
+    "created": "2023-02-23T21:15:47.000Z",
+    "updated": "2023-02-23T21:15:47.136Z",
+    "summary": "test",
+    "description": "test",
+    "creator": {
+        "email": "dkulback@gmail.com",
+        "self": true
+    },
+    "organizer": {
+        "email": "dkulback@gmail.com",
+        "self": true
+    },
+    "start": {
+        "dateTime": "2023-02-25T10:00:00-07:00",
+        "timeZone": "America/Denver"
+    },
+    "end": {
+        "dateTime": "2023-02-25T10:00:00-07:00",
+        "timeZone": "America/Denver"
+    },
+    "iCalUID": "445u3jntqqegs2nrk0pe4n5pe4@google.com",
+    "sequence": 0,
+    "reminders": {
+        "useDefault": true
+    },
+    "eventType": "default"
+}
