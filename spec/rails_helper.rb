@@ -2,6 +2,7 @@
 require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
 require 'simplecov'
+require 'devise'
 SimpleCov.start
 require_relative '../config/environment'
 # Prevent database truncation if the environment is production
@@ -41,6 +42,7 @@ RSpec.configure do |config|
   # instead of true.
   config.use_transactional_fixtures = true
 
+  config.include Devise::Test::IntegrationHelpers, type: :feature
   # You can uncomment this line to turn off ActiveRecord support entirely.
   # config.use_active_record = false
 
