@@ -10,13 +10,13 @@
   <div class="border-4 rounded-sm border-teal-600">
     <div class="container mx-auto border-teal-600 rounded-sm">
       <h1 class="text-6xl font-bold inset-1 text-center text-pink-700 rounded">Current Events</h1>
-  <%= form_tag shows_path, method: :get, class: "mb-4" do %>
-    <div class="flex justify-center mx-auto items-center py-2">
-      <%= select_tag :search, options_for_select(Show.pluck(:venue).uniq),  prompt: "Venue", class: "appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" %>
-      <%= date_field_tag :date_input, nil, class: "appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" %>
-      <%= submit_tag "Search", class: "flex-shrink-0 bg-gradient-to-r from-pink-100 to-cyan-500 hover:bg-blue-200 border-blue-100 hover:border-blue-200 text-sm border-4 text-grey-700 py-1 px-2 rounded" %>
-    </div>
-  <% end %>
+      <%= form_tag shows_path, method: :get, class: "mb-4" do %>
+        <div class="flex justify-center mx-auto items-center py-2">
+          <%= select_tag :search, options_for_select(Show.pluck(:venue).uniq),  prompt: "Venue", class: "appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" %>
+          <%= date_field_tag :date_input, nil, class: "appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" %>
+          <%= submit_tag "Search", class: "flex-shrink-0 bg-gradient-to-r from-pink-100 to-cyan-500 hover:bg-blue-200 border-blue-100 hover:border-blue-200 text-sm border-4 text-grey-700 py-1 px-2 rounded" %>
+        </div>
+      <% end %>
     </div>
   </div>
   <div class="shows-data overflow-y-auto">
@@ -24,21 +24,26 @@
       <div class="overflow-y-auto h-60 grid-cols-1 gap-0 mb-4">
         <div class="overflow-y-auto col-start-1 col-end-4">
           <% @shows.each do |show| %>
-            <div class="border-2 border-x-rose-500/100">
-              <p class="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-indigo-500">
-              <%= show.date.strftime('%m-%d-%Y')%>
-              <p class="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-indigo-500">
-              <%= show.band %>
-              </p>
-              <p class="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-indigo-500">
-              <%= show.venue%>
-              </p>
-              <p class="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-indigo-500">
-              <%= show.doors %>
-              </p>
-              <% if !show.tickets.blank? %>
-                <a href="<%= show.tickets%>" class="text-blue-500 underline">tickets</a>
-              <% end %>
+            <div class="show-<%= show.id %>">
+              <div class="border-2 border-x-rose-500/100">
+                <p class="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-indigo-500">
+                <%= show.date.strftime('%m-%d-%Y')%>
+                <p class="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-indigo-500">
+                <%= show.band %>
+                </p>
+                <p class="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-indigo-500">
+                <%= show.venue%>
+                </p>
+                <p class="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-indigo-500">
+                <%= show.doors %>
+                </p>
+                <% if !show.tickets.blank? %>
+                  <a href="<%= show.tickets%>" class="text-blue-500 underline">tickets</a>
+                <% end %>
+                <% if current_user %>
+                  <%= button_to 'Add to Calendar', add_to_calendar_show_path(show), method: :post %>
+                <% end %>
+              </div>
             </div>
           <% end %>
         </div>
