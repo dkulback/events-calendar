@@ -6,6 +6,8 @@ class LostLakeScraper
     events.xpath("//div[@class='col-12 eventWrapper rhpSingleEvent py-4 px-0']").each do |event|
       show = {}
       show[:band] = event.css('a').css('h2')&.text&.squish
+      next if show[:band].include?('PRIVATE')
+
       show[:date] = event.css('a').css('#eventDate')&.text&.squish
       show[:venue] = event.css('a').css('.venueLink')&.text&.squish
       show[:doors] = event.css("[class='eventDateDetails mt-md-0 mb-md-2']")&.text&.squish
