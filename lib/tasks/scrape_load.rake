@@ -92,6 +92,15 @@ namespace :scrape_load do
       puts "Successfully scraped #{shows.count} Glob Hall events"
     end
   end
+  desc 'scrape skylark for evetns'
+  task skylark: :environment do
+    shows = ShowBuilderService.build_shows(SkylarkScraper)
+    if shows.empty?
+      puts 'No Skylark events to scrape.'
+    else
+      puts "Successfully scraped #{shows.count} Skylark events"
+    end
+  end
   desc 'Reset all Primary Keys'
   task reset_pks: :environment do
     ActiveRecord::Base.connection.tables.each do |t|
