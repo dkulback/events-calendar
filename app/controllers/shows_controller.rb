@@ -7,16 +7,14 @@ class ShowsController < ApplicationController
   # GET /shows or /shows.json
   def index; end
 
-  def scrape
-    response = ShowBuilderService.build
-    if response
-      flash[:notice] = 'Successfully scraped urls'
+  def search
+    venue = params[:venue_input]
+    if venue.present?
+      @shows = ShowBuilderService.build_custom(SearchScraper.shows(venue))
+      redirect_to root_path, notice: 'Shows found!'
     else
-      flash[:alert] = response[:error]
+      redirect_to root_path notice: 'Please enter a venue'
     end
-    redirect_to root_path
-  rescue StandardError => e
-    flash.now[:alert] = "Error: #{e}"
   end
 
   # GET /shows/1 or /shows/1.json

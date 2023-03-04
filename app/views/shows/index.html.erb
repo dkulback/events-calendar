@@ -6,6 +6,12 @@
   <%= link_to 'Sign Up', new_user_registration_path, data: {turbo: 'false'} %>
 <% end %>
 
+<%= form_tag search_shows_path, class:"search-venues", method: :get do %>
+  <%= label_tag :venue_input, 'Search Venue by Name:' %>
+  <%= text_field_tag :venue_input %>
+  <%= submit_tag 'Search Venue', class: 'btn btn-primary' %>
+<% end %>
+
 <div class="items-center justify-center rounded border-teal-600 rounded-sm bg-gradient-to-r from-cyan-500 to-pink-100 order-first">
   <div class="border-4 rounded-sm border-teal-600">
     <div class="container mx-auto border-teal-600 rounded-sm">

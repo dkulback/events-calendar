@@ -4,6 +4,7 @@ Rails.application.routes.draw do
                             omniauth_callbacks: 'users/omniauth_callbacks' }
   resources :shows do
     post 'add_to_calendar', on: :member
+    get 'search', on: :collection
   end
 
   root to: 'shows#index'

@@ -87,4 +87,26 @@ RSpec.describe 'shows/index', type: :feature do
       end
     end
   end
+  describe 'search venue scraper button' do
+    scenario 'lets users search for venues on the scraper' do
+      response = File.read('spec/fixtures/ogden.html')
+      stub_request(:get, 'https://www.eventbrite.com/d/co--denver/ogden/')
+        .to_return(status: 200, body: response)
+
+      stub_request(:get, 'https://www.eventbrite.com/d/co--denver/ogden/?page=2')
+        .to_return(status: 200, body: response)
+      visit root_path
+      within '.search-venues' do
+        fill_in :venue_input, with: 'ogden'
+        click_on 'Search Venue'
+        expect(current_path).to eq(root_path)
+      end
+      within '.notice' do
+        expect(page).to have_content('Shows found!')
+      end
+      within '.shows-data' do
+        expect(page).to have_content('Ogden Theatre', count: 1)
+      end
+    end
+  end
 end

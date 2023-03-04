@@ -9,6 +9,12 @@ class ShowBuilderService
     build_newman
   end
 
+  def self.build_custom(venue)
+    venue.map do |show|
+      Show.find_or_create_by(show)
+    end
+  end
+
   def self.build_shows(venue)
     venue.shows.map do |show|
       Show.find_or_create_by(show)
