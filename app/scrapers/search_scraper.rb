@@ -1,5 +1,6 @@
 class SearchScraper
   def self.shows(venue)
+    venue.gsub!(' ', '+')
     url = "https://www.eventbrite.com/d/co--denver/#{venue}/"
     events = Connection.get_url(url)
     shows = []
