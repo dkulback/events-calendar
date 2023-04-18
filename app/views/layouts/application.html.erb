@@ -11,25 +11,42 @@
     <%= javascript_importmap_tags %>
   </head>
 
+  <nav class="flex items-center justify-between flex-wrap bg-blue-500 p-6">
+    <div class="flex items-center flex-shrink-0 text-white mr-6">
+      <span class="font-semibold text-xl tracking-tight">My App</span>
+    </div>
+    <div class="block lg:hidden">
+      <button id='navbar-burger' class="navbar-burger flex items-center px-3 py-2 border rounded text-gray-200 border-gray-200 hover:text-white hover:border-white">
+        <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/></svg>
+      </button>
+    </div>
+    <div id='navbar-items' class="navbar-items hidden lg:block">
+      <div class="navbar-menu">
+        <div class="navbar-end">
+          <% if current_user %>
+            <a href="#" class="navbar-item">
+              <%= link_to 'Profile', edit_user_path(current_user) %>
+            </a>
+            <a href="#" class="navbar-item">
+              <%= link_to 'Logout', destroy_user_session_path, data: {turbo: 'false'}, method: :delete %>
+            </a>
+          <% else %>
+            <a href="#" class="navbar-item">
+              <%= link_to 'Login', new_user_session_path, data: {turbo: 'false'} %>
+            </a>
+            <a href="#" class="navbar-item">
+              <%= link_to 'Sign Up', new_user_registration_path, data: {turbo: 'false'} %>
+            </a>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <%= javascript_include_tag 'navbar' %>
   <body class="bg-gradient-to-l from-pink-300 to-teal-100">
     <main class="container mx-auto mt-28 px-5">
       <p class="notice"><%= notice %></p>
       <p class="alert"><%= alert %></p>
-      <%= image_tag ("ozzy.jpeg"), class: "bg-repeat-y fixed mx-auto top-0 right-60 left-60 h-20 w-20 bg-repeat-x rounded-full" %>
-      <%= image_tag ("ozzy.jpeg"), class: "bg-repeat-y fixed mx-auto top-0 right-57 left-57 h-20 w-20 bg-repeat-x rounded-full" %>
-      <%= image_tag ("ozzy.jpeg"), class: "bg-repeat-y fixed mx-auto top-0 right-57 left-10 h-20 w-20 bg-repeat-x rounded-full" %>
-      <%= image_tag ("ozzy.jpeg"), class: "bg-repeat-y fixed mx-auto top-0 right-57 left-13 h-20 w-20 bg-repeat-x rounded-full" %>
-      <%= image_tag ("ozzy.jpeg"), class: "bg-repeat-y absolute mx-auto top-0 right-44 left-19 h-20 w-20 bg-repeat-x rounded-full" %>
-      <%= image_tag ("ozzy.jpeg"), class: "bg-repeat-y absolute mx-auto top-0 right-6 left-0 h-20 w-20 bg-repeat-x rounded-full" %>
-      <%= image_tag ("ozzy.jpeg"), class: "bg-repeat-y absolute mx-auto top-0 right-11 left-0 h-20 w-20 bg-repeat-x rounded-full" %>
-      <%= image_tag ("ozzy.jpeg"), class: "bg-repeat-y absolute mx-auto top-0 right-16 left-0 h-20 w-20 bg-repeat-x rounded-full" %>
-      <%= image_tag ("ozzy.jpeg"), class: "bg-repeat-y absolute mx-auto top-0 right-21 left-0 h-20 w-20 bg-repeat-x rounded-full" %>
-      <%= image_tag ("ozzy.jpeg"), class: "bg-repeat-y absolute mx-auto top-0 right-26 left-0 h-20 w-20 bg-repeat-x rounded-full" %>
-      <%= image_tag ("ozzy.jpeg"), class: "bg-repeat-y absolute mx-auto top-0 right-31 left-0 h-20 w-20 bg-repeat-x rounded-full" %>
-      <%= image_tag ("ozzy.jpeg"), class: "bg-repeat-y absolute mx-auto top-0 right-36 left-0 h-20 w-20 bg-repeat-x rounded-full" %>
-      <%= image_tag ("ozzy.jpeg"), class: "bg-repeat-y absolute mx-auto top-0 right-41 left-0 h-20 w-20 bg-repeat-x rounded-full" %>
-      <%= image_tag ("ozzy.jpeg"), class: "bg-repeat-y absolute mx-auto top-0 right-46 left-0 h-20 w-20 bg-repeat-x rounded-full" %>
-      <%= image_tag ("ozzy.jpeg"), class: "bg-repeat-y absolute mx-auto top-0 right-20 -left-50 h-20 w-20 bg-repeat-x rounded-full" %>
       <%= yield %>
     </main>
   </body>
