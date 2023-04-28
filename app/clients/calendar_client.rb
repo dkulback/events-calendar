@@ -10,11 +10,11 @@ class CalendarClient
       summary: show.band,
       description: show.venue,
       start: {
-        dateTime: show.date.strftime('%FT%T.%NZ'),
+        dateTime: (show.date + 7.hours).strftime('%FT%T.%NZ'),
         timeZone: 'America/Denver'
       },
       end: {
-        dateTime: show.date.strftime('%FT%T.%NZ'),
+        dateTime: (show.date + 10.hours).strftime('%FT%T.%NZ'),
         timeZone: 'America/Denver'
       },
       reminders: {
@@ -29,7 +29,7 @@ class CalendarClient
     end
   end
 
-  def self.refresh_access_token(token)
+  def refresh_access_token(token)
     response = Faraday.post('https://oauth2.googleapis.com/token',
                             {
                               client_id: ENV['GOOGLE_CLIENT_ID'],
