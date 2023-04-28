@@ -25,9 +25,6 @@
         <div class="navbar-end">
           <% if current_user %>
             <a href="#" class="navbar-item">
-              <%= link_to 'Profile', edit_user_path(current_user) %>
-            </a>
-            <a href="#" class="navbar-item">
               <%= link_to 'Logout', destroy_user_session_path, data: {turbo: 'false'}, method: :delete %>
             </a>
           <% else %>
