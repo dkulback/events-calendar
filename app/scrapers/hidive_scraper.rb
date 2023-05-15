@@ -3,8 +3,8 @@ class HidiveScraper
   def self.shows
     events = Connection.get_url(URL)
     shows = []
-    events.css('article').each do |event|
-      venue = event.css("[class='card-text--truncated__one']").text.squish
+    events.xpath("//div[@class='search-event-card-wrapper']").each do |event|
+      venue = event.xpath("//*[@id='root']/div/div[2]/div/div/div/div[1]/div/main/div/div/section[1]/div/section/div/div/section[2]/ul/li[3]/div/section/div/section[1]/div/p[2]").text
       next unless venue == 'Hi-Dive • Denver, CO'
 
       show = {}
@@ -19,6 +19,8 @@ class HidiveScraper
       show[:venue] = venue
       show[:tickets] = event.css('a')[0]['href']
       shows << show
+      require 'pry'
+      binding.pry
     end
 
     events = Connection.get_url('https://www.eventbrite.com/d/co--denver/hi-dive/?page=2')
