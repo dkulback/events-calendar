@@ -1,55 +1,43 @@
-<div id="p5-sketch"></div>
-<% if current_user %>
-  <h2> <%= current_user.name%> </h2>
-  <%= button_to "Logout", destroy_user_session_path, data: {turbo: 'false'}, method: :delete %>
-<% else %>
-  <%= link_to 'Login', new_user_session_path, data: {turbo: 'false'} %>
-  <%= link_to 'Sign Up', new_user_registration_path, data: {turbo: 'false'} %>
-<% end %>
+<body>
+  <div class="custom-cursor"></div>
+  <% if current_user %>
+    <h2> <%= current_user.name%> </h2>
+    <%= button_to "Logout", destroy_user_session_path, data: {turbo: 'false'}, method: :delete %>
+  <% else %>
+    <%= link_to 'Login', new_user_session_path, data: {turbo: 'false'} %>
+    <%= link_to 'Sign Up', new_user_registration_path, data: {turbo: 'false'} %>
+  <% end %>
 
-<%= form_tag search_shows_path, class:"search-venues", method: :get do %>
-  <%= label_tag :venue_input, 'Search Venue by Name:' %>
-  <%= text_field_tag :venue_input %>
-  <%= submit_tag 'Search Venue', class: 'btn btn-primary' %>
-<% end %>
-<h1 class="">Current Events</h1>
-<%= form_tag shows_path, method: :get, class: "mb-4" do %>
-  <div class="">
-    <%= select_tag :search, options_for_select(Show.pluck(:venue).uniq),  prompt: "Venue", class: "" %>
-    <%= date_field_tag :date_input, nil, class: "" %>
-    <%= submit_tag "Search", class: "" %>
-  </div>
-<% end %>
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-  <% @shows.each do |show| %>
-    <div class="rounded-lg shadow-lg bg-gradient-to-br from-purple-500 to-pink-500">
-      <div class="p-6">
-        <h3 class="text-lg font-medium text-gray-900 mb-2"><%= show.band%></h3>
-        <p class="text-gray-800 mb-4"><%= show.venue %></p>
-        <p class="text-gray-600 mb-4"><%= show.date.strftime("%A, %B %d, %Y") %></p>
-        <p class="text-gray-800 mb-4"><%= show.doors %></p>
-        <% if !show.tickets.blank? %>
-          <p class="text-grey-800 mb-4" <a href="<% show.tickets%>" class="">tickets</a> </p>
-        <% end %>
-        <% if current_user %>
-          <%= button_to 'Add to Calendar', add_to_calendar_show_path(show), method: :post %>
-        <% end %>
-      </div>
+  <%= form_tag search_shows_path, class:"search-venues", method: :get do %>
+    <%= label_tag :venue_input, 'Search Venue by Name:' %>
+    <%= text_field_tag :venue_input %>
+    <%= submit_tag 'Search Venue', class: 'btn btn-primary' %>
+  <% end %>
+  <h1 class="">Current Events</h1>
+  <%= form_tag shows_path, method: :get, class: "mb-4" do %>
+    <div class="">
+      <%= select_tag :search, options_for_select(Show.pluck(:venue).uniq),  prompt: "Venue", class: "" %>
+      <%= date_field_tag :date_input, nil, class: "" %>
+      <%= submit_tag "Search", class: "" %>
     </div>
   <% end %>
-</div>
-<script>
-  var sketch = function(p) {
-    p.setup = function() {
-      var canvas = p.createCanvas(400, 400);
-      canvas.parent('p5-sketch');
-    };
-
-    p.draw = function() {
-      p.background(220);
-      p.ellipse(p.mouseX, p.mouseY, 50, 50);
-    };
-  };
-
-  new p5(sketch);
-</script>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <% @shows.each do |show| %>
+      <div class="rounded-lg shadow-lg bg-gradient-to-br from-purple-500 to-pink-500">
+        <div class="p-6">
+          <h3 class="text-lg font-medium text-gray-900 mb-2"><%= show.band%></h3>
+          <p class="text-gray-800 mb-4"><%= show.venue %></p>
+          <p class="text-gray-600 mb-4"><%= show.date.strftime("%A, %B %d, %Y") %></p>
+          <p class="text-gray-800 mb-4"><%= show.doors %></p>
+          <% if !show.tickets.blank? %>
+            <p class="text-grey-800 mb-4" <a href="<% show.tickets%>" class="">tickets</a> </p>
+          <% end %>
+          <% if current_user %>
+            <%= button_to 'Add to Calendar', add_to_calendar_show_path(show), method: :post %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <script src="/assets/mouse.js"></script>
+</body>
