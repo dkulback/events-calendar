@@ -11,10 +11,15 @@ class HqScraper
       show[:date] = date.to_date
       show[:venue] = event.css('.location').text.squish
       show[:doors] = event.css('.event-date').css('.time').text.squish
-      show[:tickets] = if event.css('.more-info-btn').css('button')[1].text == 'Free'
+      button = event.css('.more-info-btn button')[1]
+
+      show[:tickets] = if button && button.text == 'Free'
                          'FREE'
+                       elsif button
+                         button['onclick'][13..57]
                        else
-                         event.css('.more-info-btn').css('button')[1]['onclick'][13..57]
+                         # Handle the case when the button doesn't exist
+                         'No Button Found'
                        end
       shows << show
     end
