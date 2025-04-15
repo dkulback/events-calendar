@@ -1,18 +1,22 @@
 class SongkickScraper
-  URL = 'https://www.songkick.com/metro-areas/6404-us-denver/tonight'.freeze
-
-  URL2 = 'https://www.songkick.com/metro-areas/6404-us-denver'.freeze
+  BASE_URL = 'https://www.songkick.com/metro-areas/6404-us-denver?page=%<page>s#metro-area-calendar'.freeze
 
   def self.shows
-    events = Connection.c_req(URL2)
-    shows = []
-    events.css('.event-listings-element').each do |event|
-      show = {}
-      show[:band] = event.css('strong').text
-      show[:date] = event.css('time').first.attributes['datetime'].content.to_date
-      show[:venue] = event.css('.venue-link').text
-      shows << show
+    all_shows = []
+
+    (1..25).each do |page_num|
+      url = format(BASE_URL, page: page_num)
+      events = Connection.c_req(url)
+
+      events.css('.event-listings-element').each do |event|
+        show = {}
+        show[:band]  = event.css('strong').text.strip
+        show[:date]  = event.css('time').first&.attribute('datetime')&.value&.to_date
+        show[:venue] = event.css('.venue-link').text.strip
+        all_shows << show
+      end
     end
-    shows
+
+    all_shows
   end
 end
