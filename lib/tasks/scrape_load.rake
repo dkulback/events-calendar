@@ -65,7 +65,7 @@ namespace :scrape_load do
       puts "Successfully scraped #{shows.count} Gothic Theater events"
     end
   end
-  desc 'scrape oriental theater for evetns'
+  desc 'scrape oriental theater for events'
   task oriental: :environment do
     shows = ShowBuilderService.build_shows(OrientalScraper)
     if shows.empty?
@@ -74,7 +74,7 @@ namespace :scrape_load do
       puts "Successfully scraped #{shows.count} Oriental Theater events"
     end
   end
-  desc 'scrape lost lake for evetns'
+  desc 'scrape lost lake for events'
   task lost_lake: :environment do
     shows = ShowBuilderService.build_shows(LostLakeScraper)
     if shows.empty?
@@ -83,7 +83,7 @@ namespace :scrape_load do
       puts "Successfully scraped #{shows.count} lost lake events"
     end
   end
-  desc 'scrape lost lake for evetns'
+  desc 'scrape glob hall for events'
   task globe_hall: :environment do
     shows = ShowBuilderService.build_shows(GlobeHallScraper)
     if shows.empty?
@@ -92,13 +92,22 @@ namespace :scrape_load do
       puts "Successfully scraped #{shows.count} Glob Hall events"
     end
   end
-  desc 'scrape skylark for evetns'
+  desc 'scrape skylark for events'
   task skylark: :environment do
     shows = ShowBuilderService.build_shows(SkylarkScraper)
     if shows.empty?
       puts 'No Skylark events to scrape.'
     else
       puts "Successfully scraped #{shows.count} Skylark events"
+    end
+  end
+  desc 'scrape songkick for events'
+  task songkick: :environment do
+    shows = ShowBuilderService.build_shows(SongkickScraper)
+    if shows.empty?
+      puts 'No songkick events to scrape.'
+    else
+      puts "Successfully scraped #{shows.count} songkick events"
     end
   end
   desc 'Reset all Primary Keys'
