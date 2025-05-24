@@ -118,12 +118,15 @@ Devise.setup do |config|
   # with the hashed password. This allows you to change the stretches without
   # invalidating existing passwords.
   #
-  config.omniauth :google_oauth2, ENV['GOOGLE_CLIENT_ID'], ENV['GOOGLE_CLIENT_SECRET'],
+  config.omniauth :google_oauth2,
+                  ENV['GOOGLE_CLIENT_ID'],
+                  ENV['GOOGLE_CLIENT_SECRET'],
                   {
+                    scope: 'email,profile,https://www.googleapis.com/auth/calendar',
+                    access_type: 'offline',
                     prompt: 'consent',
                     image_aspect_ratio: 'square',
-                    image_size: 50,
-                    scope: 'profile email calendar'
+                    image_size: 50
                   }
   # Limiting the stretches to just one in testing will increase the performance of
   # your test suite dramatically. However, it is STRONGLY RECOMMENDED to not use
