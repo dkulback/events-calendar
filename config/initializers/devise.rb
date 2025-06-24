@@ -122,7 +122,7 @@ Devise.setup do |config|
                   ENV['GOOGLE_CLIENT_ID'],
                   ENV['GOOGLE_CLIENT_SECRET'],
                   {
-                    scope: 'email,profile,https://www.googleapis.com/auth/calendar',
+                    scope: 'email profile https://www.googleapis.com/auth/calendar https://www.googleapis.com/auth/calendar.events',
                     access_type: 'offline',
                     prompt: 'consent',
                     image_aspect_ratio: 'square',
