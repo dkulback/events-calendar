@@ -67,7 +67,7 @@ class ShowsController < ApplicationController
   end
 
   def add_to_calendar
-    response = CalendarClient.insert_event(current_user.access_token, @show)
+    response = CalendarClient.insert_event(current_user, @show)
     if response['status'] == 'confirmed'
       redirect_to root_path, notice: 'Show added to your calendar!'
     else
